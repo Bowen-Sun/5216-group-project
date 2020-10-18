@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "28632500383",
+    "firebase_url": "https://answer-robot-db870.firebaseio.com",
+    "project_id": "answer-robot-db870",
+    "storage_bucket": "answer-robot-db870.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:28632500383:android:5dc27707cc379cb8a9baaa",
+        "android_client_info": {
+          "package_name": "comp5216.sydney.edu.au.myapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "28632500383-uf1uc3qe2bk27ikvtcaqp9oqbkdoarui.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB_IoYFBLQzgMs6ya3wrlTMoJtOIyXkH2s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "28632500383-uf1uc3qe2bk27ikvtcaqp9oqbkdoarui.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

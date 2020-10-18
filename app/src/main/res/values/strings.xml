@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">My Application</string>
+    <string name="do_not_save_title">Leave</string>
+    <string name="do_not_save_message">Are you sure to cancel this reply? Your unsaved edit will be discarded if you click YES</string>
+    <string name="do_not_save">YES</string>
+    <string name="save">Continue editing</string>
+    <string name="reply">Reply</string>
+    <string name="post">Post</string>
+    <string name="cancel">Cancel</string>
+    <string name="go_back">Go back</string>
+    <string name="user_photo">User photo</string>
+    <string name="title">Title</string>
+    <string name="saveChange">Save</string>
+    <string name="dialog_delete_title">Delete an item</string>
+    <string name="dialog_delete_msg">Do you want to delete this item?</string>
+    <string name="delete">Delete</string>
+</resources>
