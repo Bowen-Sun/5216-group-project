@@ -6,56 +6,59 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <SearchView
+        android:id="@+id/search_note"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <ListView
         android:id="@+id/lstView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginBottom="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
+        android:layout_height="500dp"
+        android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/add_note">
-
-    </ListView>>
+        app:layout_constraintTop_toBottomOf="@+id/search_note"/>
 
     <Button
         android:id="@+id/add_note"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Add Note"
-        android:layout_marginBottom="20dp"
-        android:layout_marginEnd="20dp"
+        android:text="@string/add_note"
+        android:layout_marginEnd="15dp"
         android:onClick="addNote"
+        app:layout_constraintTop_toBottomOf="@id/lstView"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         />
 
-    <Button
-        android:id="@+id/add_announcement"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Add announcement"
-        android:layout_marginBottom="20dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        />
+
 
     <Button
         android:id="@+id/userProfile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="User"
-        android:layout_marginBottom="20dp"
-        android:layout_marginStart="20dp"
+        android:text="@string/user"
         android:onClick="userProfile"
+        app:layout_constraintTop_toBottomOf="@id/lstView"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@id/add_announcement"
+        app:layout_constraintStart_toEndOf="@id/show_announcement"
         app:layout_constraintEnd_toStartOf="@id/add_note"
+        />
+
+    <Button
+        android:id="@+id/show_announcement"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/show_announcement"
+        android:onClick="showAnnouncement"
+        app:layout_constraintTop_toBottomOf="@id/lstView"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/userProfile"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

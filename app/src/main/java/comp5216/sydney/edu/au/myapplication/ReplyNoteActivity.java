@@ -67,7 +67,7 @@ public class ReplyNoteActivity extends Activity {
                 // Get Post object and use the values to update the UI
                 for (DataSnapshot noteSnapshot: dataSnapshot.getChildren()) {
                     Reply reply = noteSnapshot.getValue(Reply.class);
-                    orderedItems.add(reply);
+                    orderedItems.add(0,reply);
                 }
                 itemsAdapter = new ReplyAdapter(this, R.layout.reply_layout, orderedItems);
                 listView.setAdapter(itemsAdapter);
@@ -114,7 +114,7 @@ public class ReplyNoteActivity extends Activity {
         editNote = (EditText)findViewById(R.id.editReply);
         reply = new Reply(createTime+" : "+mAuth.getUid(),editNote.getText().toString(),createTime,note.getName(),mAuth.getUid());
         Log.d("reply3", " reply: "+reply);
-        orderedItems.add(reply);
+        orderedItems.add(0,reply);
         itemsAdapter.notifyDataSetChanged();
     }
 

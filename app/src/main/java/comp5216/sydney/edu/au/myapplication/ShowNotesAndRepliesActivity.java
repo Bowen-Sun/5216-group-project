@@ -2,10 +2,7 @@ package comp5216.sydney.edu.au.myapplication;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -14,9 +11,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.storage.FileDownloadTask;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
 
 
 import android.content.DialogInterface;
@@ -30,7 +24,6 @@ import android.widget.ListView;
 import java.io.File;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Date;
 
 import comp5216.sydney.edu.au.myapplication.adapter.NotesAdapter;
 import comp5216.sydney.edu.au.myapplication.adapter.ReplyAdapter;
@@ -47,8 +40,8 @@ public class ShowNotesAndRepliesActivity extends AppCompatActivity {
     NotesAdapter notesAdapter;
     ReplyAdapter replyAdapter;
     private DatabaseReference database;
-    int EditNote = 1;
-    int EditReply = 2;
+    int EditNote = 3;
+    int EditReply = 4;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.d("show", "Here1");
@@ -70,7 +63,7 @@ public class ShowNotesAndRepliesActivity extends AppCompatActivity {
                 for (DataSnapshot noteSnapshot: dataSnapshot.getChildren()) {
                     Note note = noteSnapshot.getValue(Note.class);
                     Log.d("show", "Here2");
-                    ownNotes.add(note);
+                    ownNotes.add(0,note);
                     Log.d("show", "notes: "+ ownNotes);
                     Log.d("show", "note: "+ note);
                     Log.d("show", "noteTitle: "+ note.getTitle());
@@ -102,7 +95,7 @@ public class ShowNotesAndRepliesActivity extends AppCompatActivity {
                 for (DataSnapshot noteSnapshot: dataSnapshot.getChildren()) {
                     Log.d("show", "Here4");
                     Reply reply = noteSnapshot.getValue(Reply.class);
-                    ownReplys.add(reply);
+                    ownReplys.add(0,reply);
                 }
                 replyAdapter = new ReplyAdapter(this, R.layout.reply_layout, ownReplys);
                 Replies.setAdapter(replyAdapter);
@@ -130,7 +123,7 @@ public class ShowNotesAndRepliesActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Note updateNote = (Note) notesAdapter.getItem(i);
 
-                Intent intent = new Intent(ShowNotesAndRepliesActivity.this, EditNotesAndRepliesActivity.class);
+                Intent intent = new Intent(ShowNotesAndRepliesActivity.this, EditNotesAndRepliesAndAnnouncementActivity.class);
                 // put "extras" into the bundle for access in the edit activity
                 intent.putExtra("note", (Serializable) updateNote);
                 intent.putExtra("position", i);
@@ -175,7 +168,7 @@ public class ShowNotesAndRepliesActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Reply updateReply = (Reply) replyAdapter.getItem(i);
 
-                Intent intent = new Intent(ShowNotesAndRepliesActivity.this, EditNotesAndRepliesActivity.class);
+                Intent intent = new Intent(ShowNotesAndRepliesActivity.this, EditNotesAndRepliesAndAnnouncementActivity.class);
                 // put "extras" into the bundle for access in the edit activity
                 intent.putExtra("reply", (Serializable) updateReply);
                 intent.putExtra("position", i);

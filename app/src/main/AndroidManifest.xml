@@ -10,7 +10,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".EditNotesAndRepliesActivity"></activity>
+        <activity android:name=".DisplayAnnouncement"></activity>
+        <activity android:name=".ShowAnnouncement" />
+        <activity android:name=".AddAnnouncement" />
+        <activity android:name=".EditNotesAndRepliesAndAnnouncementActivity" />
         <activity android:name=".ShowNotesAndRepliesActivity" />
         <activity android:name=".AddNote" />
         <activity android:name=".RegisterActivity" />

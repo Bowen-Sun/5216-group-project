@@ -1,14 +1,17 @@
 package comp5216.sydney.edu.au.myapplication;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.SearchView;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -37,38 +40,29 @@ public class MainActivity extends AppCompatActivity {
     NotesAdapter itemsAdapter;
     private FirebaseAuth mAuth;
     private DatabaseReference database;
-    Button addAnnouncement;
+    Button showAnnouncement;
     FirebaseUser currentUser;
-    @Override
-    public void onStart() {
-        super.onStart();
-        Log.d("post", "database: "+ database);
-        Log.d("post", "database: "+ database);
-        // Check if user is signed in (non-null) and update UI accordingly.
-
-        Log.d("adapter", "auth: "+currentUser);
-        if(currentUser==null){
-            Intent intent=new Intent(MainActivity.this, LoginActivity.class);
-            startActivity(intent);
-        }
-        Log.w("post", "notes: "+ orderedItems);
-
-    }
+    SearchView searchView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         mAuth = FirebaseAuth.getInstance();
-        database = FirebaseDatabase.getInstance().getReference();
-        super.onCreate(savedInstanceState);
-        orderedItems = new ArrayList<Note>();
-        setContentView(R.layout.activity_main);
-        listView = findViewById(R.id.lstView);
-        addAnnouncement = findViewById(R.id.add_announcement);
         currentUser = mAuth.getCurrentUser();
-        addAnnouncement.setVisibility(View.GONE);
-        if (currentUser.getUid().equals("8IbdHSrb9DTLjsTeGq6Eg4Cr0xv1")){
-            addAnnouncement.setVisibility(View.VISIBLE);
+        if(currentUser==null){
+            Intent intent=new Intent(MainActivity.this, LoginActivity.class);
+            startActivity(intent);
         }
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        searchView = findViewById(R.id.search_note);
+
+        database = FirebaseDatabase.getInstance().getReference();
+        orderedItems = new ArrayList<Note>();
+        listView = findViewById(R.id.lstView);
+        showAnnouncement = findViewById(R.id.show_announcement);
+
+
         ValueEventListener noteListener = new ValueEventListener(){
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -77,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
                 for (DataSnapshot noteSnapshot: dataSnapshot.getChildren()) {
                     Note note = noteSnapshot.getValue(Note.class);
                     Log.d("post", "notes: "+ orderedItems);
-                    orderedItems.add(note);
+                    orderedItems.add(0,note);
                     Log.d("post", "notes: "+ orderedItems);
                     Log.d("post", "note: "+ note);
                     Log.d("post", "noteTitle: "+ note.getTitle());
@@ -99,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
         allQuery.addValueEventListener(noteListener);
         Log.d("post", "Here notes: "+ orderedItems);
         setupListViewListener();
-
+        setupSearchListener();
     }
 
     public void addNote(View view){
@@ -112,6 +106,10 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void showAnnouncement(View view){
+        Intent intent=new Intent(MainActivity.this, ShowAnnouncement.class);
+        startActivity(intent);
+    }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -132,7 +130,7 @@ public class MainActivity extends AppCompatActivity {
                     Note Note = new Note(title, note, createTime, uid,createTime+" : "+uid);
                     database.child("notes").child(createTime+" : "+uid).setValue(Note);
                     database.child("users").child(uid).child("questions").child(createTime+" : "+uid).setValue(Note);
-                    orderedItems.add(Note);
+                    orderedItems.add(0,Note);
                     itemsAdapter.notifyDataSetChanged();
                 }
             }
@@ -168,6 +166,76 @@ public class MainActivity extends AppCompatActivity {
                 // Notify listView adapter to update the list
                 itemsAdapter.notifyDataSetChanged();
             }});
+    }
+
+    private  void setupSearchListener(){
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(final String query) {
+                if (query.length() > 0) {
+                    orderedItems.clear();
+                    ValueEventListener noteListener = new ValueEventListener(){
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            Log.d("post1", "Here!!!");
+                            // Get Post object and use the values to update the UI
+                            for (DataSnapshot noteSnapshot: dataSnapshot.getChildren()) {
+                                Note note = noteSnapshot.getValue(Note.class);
+                                if(note.getTitle().toLowerCase().contains(query.toLowerCase())) orderedItems.add(0,note);
+                            }
+                            itemsAdapter = new NotesAdapter(this, R.layout.notes_layout, orderedItems);
+                            listView.setAdapter(itemsAdapter);
+                        }
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+                            // Getting Post failed, log a message
+                            Log.w("error", "loadPost:onCancelled", databaseError.toException());
+                            // ...
+                        }
+                    };
+
+                    Query allQuery = database.child("notes").orderByChild("data");
+                    allQuery.addListenerForSingleValueEvent(noteListener);
+                    searchView.setIconified(true);
+                }
+                return true;
+            }
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
+
+        searchView.setOnCloseListener(new SearchView.OnCloseListener(){
+
+            @Override
+            public boolean onClose() {
+                orderedItems.clear();
+                ValueEventListener noteListener = new ValueEventListener(){
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        Log.d("post1", "Here!!!");
+                        // Get Post object and use the values to update the UI
+                        for (DataSnapshot noteSnapshot: dataSnapshot.getChildren()) {
+                            Note note = noteSnapshot.getValue(Note.class);
+                            orderedItems.add(0,note);
+                        }
+                        itemsAdapter = new NotesAdapter(this, R.layout.notes_layout, orderedItems);
+                        listView.setAdapter(itemsAdapter);
+                    }
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        // Getting Post failed, log a message
+                        Log.w("error", "loadPost:onCancelled", databaseError.toException());
+                        // ...
+                    }
+                };
+
+                Query allQuery = database.child("notes").orderByChild("data");
+                allQuery.addListenerForSingleValueEvent(noteListener);
+                return false;
+            }
+        });
     }
 
     public static String stampToDate(long time) {
