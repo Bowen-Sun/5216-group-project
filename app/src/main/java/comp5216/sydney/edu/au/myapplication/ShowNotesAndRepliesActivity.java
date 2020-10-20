@@ -33,7 +33,6 @@ import comp5216.sydney.edu.au.myapplication.notes.Reply;
 public class ShowNotesAndRepliesActivity extends AppCompatActivity {
     private FirebaseUser mAuth;
     private DatabaseReference storageRef;
-    private File localFile;
     ListView Notes,Replies;
     ArrayList<Note> ownNotes;
     ArrayList<Reply> ownReplys;
@@ -58,15 +57,10 @@ public class ShowNotesAndRepliesActivity extends AppCompatActivity {
         ValueEventListener noteListener = new ValueEventListener(){
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                Log.d("show", "Here!!!");
                 // Get Post object and use the values to update the UI
                 for (DataSnapshot noteSnapshot: dataSnapshot.getChildren()) {
                     Note note = noteSnapshot.getValue(Note.class);
-                    Log.d("show", "Here2");
                     ownNotes.add(0,note);
-                    Log.d("show", "notes: "+ ownNotes);
-                    Log.d("show", "note: "+ note);
-                    Log.d("show", "noteTitle: "+ note.getTitle());
                 }
                 notesAdapter = new NotesAdapter(this, R.layout.notes_layout, ownNotes);
                 Notes.setAdapter(notesAdapter);
@@ -80,11 +74,15 @@ public class ShowNotesAndRepliesActivity extends AppCompatActivity {
             }
         };
         Log.d("show", "Here3");
-        Query noteQuery1 = storageRef.child("notes").child("ownerID").equalTo(mAuth.getUid());
-        Query noteQuery2 = storageRef.child("notes").orderByChild("ownerID").equalTo(mAuth.getUid());
-        Log.d("show", "Here3 +"+noteQuery1);
-        Log.d("show", "Here3 +"+noteQuery2);
-        noteQuery2.addListenerForSingleValueEvent(noteListener);
+        if(mAuth.getUid().equals("8IbdHSrb9DTLjsTeGq6Eg4Cr0xv1")){
+            Query allQuery = database.child("notes").orderByChild("data");
+            allQuery.addListenerForSingleValueEvent(noteListener);
+        }
+        else {
+            Query noteQuery = storageRef.child("notes").orderByChild("ownerID").equalTo(mAuth.getUid());
+            noteQuery.addListenerForSingleValueEvent(noteListener);
+        }
+
 
 
         ValueEventListener replyListener = new ValueEventListener(){
@@ -108,11 +106,15 @@ public class ShowNotesAndRepliesActivity extends AppCompatActivity {
                 // ...
             }
         };
-        Log.d("show", "Here5");
-        Query ReplyQuery = storageRef.child("replys").orderByChild("ownerID").equalTo(mAuth.getUid());
-        ReplyQuery.addListenerForSingleValueEvent(replyListener);
-        Log.d("show", "Here5 +"+ReplyQuery);
-        Log.d("show", "Here5 +"+ReplyQuery);
+        if(mAuth.getUid().equals("8IbdHSrb9DTLjsTeGq6Eg4Cr0xv1")){
+            Query allQuery = database.child("replys").orderByChild("data");
+            allQuery.addListenerForSingleValueEvent(replyListener);
+        }
+        else{
+            Query ReplyQuery = storageRef.child("replys").orderByChild("ownerID").equalTo(mAuth.getUid());
+            ReplyQuery.addListenerForSingleValueEvent(replyListener);
+        }
+
         setupNotesListViewListener();
     }
 
@@ -150,7 +152,6 @@ public class ShowNotesAndRepliesActivity extends AppCompatActivity {
                                 ownNotes.remove(position);
                                 notesAdapter.notifyDataSetChanged();
                                 database.child("notes").child(deleteNote.getName()).removeValue();
-                                database.child("users").child(deleteNote.getOwnerID()).child("questions").child(deleteNote.getName()).removeValue();
                             }});
                 builder.setNegativeButton(R.string.cancel, new
                         DialogInterface.OnClickListener() {
@@ -216,7 +217,6 @@ public class ShowNotesAndRepliesActivity extends AppCompatActivity {
             if (resultCode == RESULT_OK) {
                 Note editedNote = (Note) data.getSerializableExtra("note");
                 database.child("notes").child(editedNote.getName()).setValue(editedNote);
-                database.child("users").child(editedNote.getOwnerID()).child("questions").child(editedNote.getName()).setValue(editedNote);
                 int position = data.getIntExtra("position", -1);
                 ownNotes.set(position,editedNote);
                 notesAdapter.notifyDataSetChanged();

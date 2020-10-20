@@ -35,6 +35,7 @@
         android:maxLines="2"
         android:textSize="10sp"/>
 </LinearLayout>
+
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="match_parent"
@@ -45,15 +46,38 @@
 
         <TextView
             android:id="@+id/createTime"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="0dp"
             android:textColor="	#666666"
             android:textSize="15sp"
-            android:layout_weight="0.5"
+            android:layout_weight="0.2"
             android:ellipsize="end"
             android:maxEms="10"
-            android:maxLines="3"
-            tools:ignore="NestedWeights" />
+            android:maxLines="3" />
+
+
+        <TextView
+            android:id="@+id/createName"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:textColor="	#666666"
+            android:textSize="15sp"
+            android:layout_weight="0.2"
+            android:ellipsize="end"
+            android:maxEms="10"
+            android:maxLines="3" />
+
+        <TextView
+            android:id="@+id/stuffOrStudent"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:textColor="	#666666"
+            android:textSize="15sp"
+            android:layout_weight="0.2"
+            android:ellipsize="end"
+            android:maxEms="10"
+            android:maxLines="3" />
+
     </LinearLayout>
 
 </LinearLayout>

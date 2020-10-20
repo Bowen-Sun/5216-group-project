@@ -1,18 +1,23 @@
 package comp5216.sydney.edu.au.myapplication;
 
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.annotation.NonNull;
 
+
+import android.app.Activity;
 import android.content.Intent;
+
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SearchView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -21,7 +26,11 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.ListResult;
+import com.google.firebase.storage.StorageReference;
 
+import java.io.File;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -31,7 +40,8 @@ import comp5216.sydney.edu.au.myapplication.adapter.NotesAdapter;
 import comp5216.sydney.edu.au.myapplication.notes.Note;
 import comp5216.sydney.edu.au.myapplication.notes.Reply;
 
-public class MainActivity extends AppCompatActivity {
+
+public class MainActivity extends Activity {
     int POST_NOTE = 1;
     int Reply_NOTE = 2;
     ListView listView;
@@ -40,12 +50,15 @@ public class MainActivity extends AppCompatActivity {
     NotesAdapter itemsAdapter;
     private FirebaseAuth mAuth;
     private DatabaseReference database;
+    private StorageReference storageRef;
     Button showAnnouncement;
     FirebaseUser currentUser;
     SearchView searchView;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        storageRef = FirebaseStorage.getInstance().getReference();
         mAuth = FirebaseAuth.getInstance();
         currentUser = mAuth.getCurrentUser();
         if(currentUser==null){
@@ -62,11 +75,11 @@ public class MainActivity extends AppCompatActivity {
         listView = findViewById(R.id.lstView);
         showAnnouncement = findViewById(R.id.show_announcement);
 
-
         ValueEventListener noteListener = new ValueEventListener(){
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Log.d("post1", "Here!!!");
+                orderedItems.clear();
                 // Get Post object and use the values to update the UI
                 for (DataSnapshot noteSnapshot: dataSnapshot.getChildren()) {
                     Note note = noteSnapshot.getValue(Note.class);
@@ -87,13 +100,13 @@ public class MainActivity extends AppCompatActivity {
                 // ...
             }
         };
-        Log.d("post", "database: "+ database);
-        Log.d("post", "noteListener: "+ noteListener);
         Query allQuery = database.child("notes").orderByChild("data");
         allQuery.addValueEventListener(noteListener);
-        Log.d("post", "Here notes: "+ orderedItems);
+
+//        downloadPhoto();
         setupListViewListener();
         setupSearchListener();
+
     }
 
     public void addNote(View view){
@@ -129,9 +142,6 @@ public class MainActivity extends AppCompatActivity {
                     Log.d("User", "time:" + stampToDate(createTime));
                     Note Note = new Note(title, note, createTime, uid,createTime+" : "+uid);
                     database.child("notes").child(createTime+" : "+uid).setValue(Note);
-                    database.child("users").child(uid).child("questions").child(createTime+" : "+uid).setValue(Note);
-                    orderedItems.add(0,Note);
-                    itemsAdapter.notifyDataSetChanged();
                 }
             }
         }
@@ -237,6 +247,32 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+    private void downloadPhoto(){
+        final ArrayList<StorageReference> userImages = new ArrayList();
+        Log.d("File1111", " this: "+this.getExternalFilesDir(null));
+        final String typestr = "/userImages/";
+        StorageReference userImageRef = storageRef.child("users");
+        userImageRef.listAll().addOnSuccessListener(new OnSuccessListener<ListResult>() {
+
+            @Override
+            public void onSuccess(ListResult listResult) {
+                for (StorageReference item : listResult.getItems()) {
+                    userImages.add(item);
+                    Log.d("Files", " success get references");
+                }
+            }
+        })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        String errorMessage = e.getMessage();
+                        Log.w("files", errorMessage);
+                        // Uh-oh, an error occurred!
+                    }
+                });
+    }
+
 
     public static String stampToDate(long time) {
         String res;

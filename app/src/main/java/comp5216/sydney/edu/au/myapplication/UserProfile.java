@@ -15,6 +15,12 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -26,26 +32,31 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.io.File;
 import java.io.IOException;
 
+import comp5216.sydney.edu.au.myapplication.users.UserModel;
+
 
 public class UserProfile extends AppCompatActivity {
     private FirebaseUser mAuth;
     private StorageReference storageRef;
     private FirebaseStorage storage;
+    private DatabaseReference database;
     private File localFile;
     TextView name;
     ImageView photo;
+    UserModel user;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.user_profile_layout);
-
+        database = FirebaseDatabase.getInstance().getReference();
         storage = FirebaseStorage.getInstance();
         storageRef = storage.getReference();
         mAuth = FirebaseAuth.getInstance().getCurrentUser();
         Log.d("User","userID: "+mAuth.getUid());
         name = findViewById(R.id.name);
         photo = findViewById(R.id.photo);
-        name.setText(mAuth.getUid());
+
 
         StorageReference photoRef = storageRef.child("users/"+mAuth.getUid());
 
@@ -55,7 +66,7 @@ public class UserProfile extends AppCompatActivity {
             photoRef.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                    Log.d("User","success: ");
+                    Log.d("User1111111","success: ");
                 }
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
@@ -74,6 +85,26 @@ public class UserProfile extends AppCompatActivity {
             Log.d("User","fail2: ");
             e.printStackTrace();
         }
+
+        ValueEventListener userListener = new ValueEventListener(){
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                for (DataSnapshot userSnapshot: dataSnapshot.getChildren()) {
+                    user = userSnapshot.getValue(UserModel.class);
+                    name.setText(user.getName());
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                // Getting Post failed, log a message
+                Log.w("error", "loadPost:onCancelled", databaseError.toException());
+                // ...
+            }
+        };
+        Query UserQuery = database.child("users").orderByChild("uid").equalTo(mAuth.getUid());
+        UserQuery.addListenerForSingleValueEvent(userListener);
 
 
 

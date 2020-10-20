@@ -56,7 +56,6 @@ public class EditNotesAndRepliesAndAnnouncementActivity extends AppCompatActivit
             editNote.setText(announcement.getContent());
         }
 
-
     }
 
     public void onSubmit(View v) {
