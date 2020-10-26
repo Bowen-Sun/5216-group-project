@@ -1,5 +1,6 @@
 package comp5216.sydney.edu.au.myapplication;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -27,11 +28,13 @@ import com.google.firebase.storage.StorageReference;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.File;
 import java.io.IOException;
 
+import comp5216.sydney.edu.au.myapplication.notes.Note;
 import comp5216.sydney.edu.au.myapplication.users.UserModel;
 
 
@@ -120,5 +123,26 @@ public class UserProfile extends AppCompatActivity {
     public void goBack(View view){
         Intent intent=new Intent(UserProfile.this, MainActivity.class);
         startActivity(intent);
+    }
+
+    public void logOut(View view){
+        AlertDialog.Builder builder = new AlertDialog.Builder(UserProfile.this);
+        // Set text for the dialog
+        builder.setTitle(R.string.log_out);
+        builder.setMessage(R.string.log_out_message);
+        builder.setPositiveButton(R.string.log_out, new
+                DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Intent intent=new Intent(UserProfile.this, LoginActivity.class);
+                        startActivity(intent);
+                    }});
+        builder.setNegativeButton(R.string.cancel, new
+                DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        // User cancelled the dialog
+                        // Nothing happens
+                    }});
+        // Show dialog
+        builder.create().show();
     }
 }
