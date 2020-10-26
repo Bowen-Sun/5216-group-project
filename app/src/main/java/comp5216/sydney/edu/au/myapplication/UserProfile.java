@@ -110,6 +110,8 @@ public class UserProfile extends AppCompatActivity {
 
     }
 
+
+
     public void showNotes(View view){
         Intent intent=new Intent(UserProfile.this, ShowNotesAndRepliesActivity.class);
         startActivity(intent);
