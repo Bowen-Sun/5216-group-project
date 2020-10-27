@@ -53,7 +53,7 @@ public class AnnouncementAdapter extends BaseAdapter {
 
         title.setText(item.getTitle());
         note.setText(item.getContent());
-        createTime.setText("Post at: \n"+stampToDate(item.getData()));
+        createTime.setText(stampToDate(item.getData()));
 
         // Return the completed view to render on screen
         return view;

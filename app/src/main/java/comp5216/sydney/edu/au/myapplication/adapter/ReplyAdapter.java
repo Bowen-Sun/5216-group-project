@@ -54,7 +54,7 @@ public class ReplyAdapter extends BaseAdapter {
         TextView createTime = (TextView) view.findViewById(R.id.createTime);
 
         relpy.setText(item.getContent());
-        createTime.setText("Reply at: \n"+stampToDate(item.getData()));
+        createTime.setText(stampToDate(item.getData()));
 
         // Return the completed view to render on screen
         return view;
