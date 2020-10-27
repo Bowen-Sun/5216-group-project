@@ -233,4 +233,8 @@ public class ShowNotesAndRepliesActivity extends AppCompatActivity {
             }
         }
     }
+    public void userProfile(View view){
+        Intent intent=new Intent(ShowNotesAndRepliesActivity.this, UserProfile.class);
+        startActivity(intent);
+    }
 }
