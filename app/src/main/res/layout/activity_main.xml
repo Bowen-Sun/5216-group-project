@@ -8,57 +8,144 @@
 
     <SearchView
         android:id="@+id/search_note"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/search"
+        android:queryHint="Searching"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="5dp"/>
     <ListView
         android:id="@+id/lstView"
         android:layout_width="match_parent"
         android:layout_height="500dp"
         android:layout_marginTop="20dp"
+        android:divider="@color/bgGrey"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/search_note"/>
 
-    <Button
-        android:id="@+id/add_note"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:orientation="horizontal"
+        android:background="@color/orange"
+        app:layout_constraintBottom_toBottomOf="parent">
+        <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/add_note"
-        android:layout_marginEnd="15dp"
-        android:onClick="addNote"
-        app:layout_constraintTop_toBottomOf="@id/lstView"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        />
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center">
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginRight="10dp"
+                android:src="@drawable/addnotes" />
+            <TextView
+                android:id="@+id/add_note"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:text="@string/add_note"
+                android:textColor="@color/white"
+                android:layout_marginEnd="15dp"
+                android:onClick="addNote"
+                app:layout_constraintTop_toBottomOf="@id/lstView"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
 
-
-
-    <Button
-        android:id="@+id/userProfile"
+    </LinearLayout>
+    <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/user"
-        android:onClick="userProfile"
-        app:layout_constraintTop_toBottomOf="@id/lstView"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@id/show_announcement"
-        app:layout_constraintEnd_toStartOf="@id/add_note"
-        />
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center">
 
-    <Button
-        android:id="@+id/show_announcement"
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/announcement" />
+
+        <TextView
+            android:id="@+id/show_announcement"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:text="Announce"
+            android:textColor="@color/white"
+            android:onClick="showAnnouncement"
+            app:layout_constraintTop_toBottomOf="@id/lstView"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/userProfile" />
+    </LinearLayout>
+    <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/show_announcement"
-        android:onClick="showAnnouncement"
-        app:layout_constraintTop_toBottomOf="@id/lstView"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/userProfile"
-        />
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center">
+
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/account" />
+        <TextView
+            android:id="@+id/userProfile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Account"
+            android:textSize="20dp"
+            android:onClick="userProfile"
+            android:textColor="@color/white"
+            app:layout_constraintTop_toBottomOf="@id/lstView"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/show_announcement"
+            app:layout_constraintEnd_toStartOf="@id/add_note"
+            />
+
+    </LinearLayout>
+    </LinearLayout>
+<!--    <Button-->
+<!--        android:id="@+id/add_note"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="@string/add_note"-->
+<!--        android:layout_marginEnd="15dp"-->
+<!--        android:onClick="addNote"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/lstView"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        />-->
+
+
+
+<!--    <Button-->
+<!--        android:id="@+id/userProfile"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="@string/Account"-->
+<!--        android:onClick="userProfile"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/lstView"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintStart_toEndOf="@id/show_announcement"-->
+<!--        app:layout_constraintEnd_toStartOf="@id/add_note"-->
+<!--        />-->
+
+<!--    <Button-->
+<!--        android:id="@+id/show_announcement"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="@string/Announcement"-->
+<!--        android:onClick="showAnnouncement"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/lstView"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintEnd_toStartOf="@id/userProfile"-->
+<!--        />-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

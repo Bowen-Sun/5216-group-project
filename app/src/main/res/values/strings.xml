@@ -23,4 +23,8 @@
     <string name="announcementnote">AnnouncementNote</string>
     <string name="post">Post</string>
     <string name="log_out">Log Out</string>
+    <string name="Announcement">Announcement</string>
+    <string name="Account">Account</string>
+    <string name="announce">announce</string>
+
 </resources>

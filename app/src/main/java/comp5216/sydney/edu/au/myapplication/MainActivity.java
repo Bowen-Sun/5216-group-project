@@ -73,7 +73,7 @@ public class MainActivity extends Activity {
         database = FirebaseDatabase.getInstance().getReference();
         orderedItems = new ArrayList<Note>();
         listView = findViewById(R.id.lstView);
-        showAnnouncement = findViewById(R.id.show_announcement);
+//        showAnnouncement = findViewById(R.id.show_announcement);
 
         ValueEventListener noteListener = new ValueEventListener(){
             @Override
