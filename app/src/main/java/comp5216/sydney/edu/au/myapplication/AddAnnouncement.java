@@ -30,4 +30,8 @@ public class AddAnnouncement extends AppCompatActivity {
         // Closes the activity, pass data to parent
         finish();
     }
+    public void showAnnouncement(View view){
+        Intent intent=new Intent(AddAnnouncement.this, ShowAnnouncement.class);
+        startActivity(intent);
+    }
 }
