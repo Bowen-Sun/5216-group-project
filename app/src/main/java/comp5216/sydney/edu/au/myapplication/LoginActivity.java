@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -21,8 +20,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
     EditText id,password;
-    Button login;
-    TextView signup;
+    Button login,signup;
     FirebaseAuth mAuth;
 
 

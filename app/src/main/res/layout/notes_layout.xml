@@ -8,11 +8,10 @@
     >
 
     <LinearLayout
-        android:layout_width="350dp"
-        android:layout_height="120dp"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
         android:layout_marginBottom="10dp"
         android:orientation="vertical"
-        android:layout_gravity="center_horizontal"
         android:paddingLeft="15dp"
         android:paddingRight="15dp"
         android:paddingTop="10dp"
@@ -38,17 +37,13 @@
                     android:textSize="15sp"
                     android:text="Harry"
                     android:layout_marginRight="15dp"/>
-
                 <TextView
                     android:id="@+id/stuffOrStudent"
                     android:layout_width="wrap_content"
-                    android:layout_height="20dp"
-                    android:background="@drawable/shape_round_corner_identity"
+                    android:layout_height="wrap_content"
                     android:text="Student"
-                    android:textColor="@color/orange"
                     android:textSize="12sp"
-                    android:paddingLeft="5dp"
-                    android:paddingRight="5dp"/>
+                    />
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -68,29 +63,25 @@
                 android:layout_gravity="center_vertical"></ImageView>
 
         </LinearLayout>
-
         <TextView
             android:id="@+id/title"
-            android:layout_width="306dp"
-            android:layout_height="60dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Title"
             android:ellipsize="end"
             android:maxEms="10"
-            android:maxLines="3"
-            android:text="Fancy working for a company with a mission for helping over 800,000+ Aussies save?!
-Cashrewards is looking for a Social Media Assistant to work closely with the Marketing and Content team by growing our social media channels through content and"
+            android:maxLines="1"
             android:textColor="	#000000"
-            android:textSize="15sp" />
-
+            android:textSize="15sp"/>
         <TextView
             android:id="@+id/note"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="note"
             android:ellipsize="end"
             android:maxEms="20"
             android:maxLines="2"
-            android:text="we are good to learning"
-            android:textSize="11sp"
-            />
+            android:textSize="11sp"/>
 
     </LinearLayout>
 

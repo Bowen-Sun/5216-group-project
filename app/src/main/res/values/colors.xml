@@ -5,14 +5,5 @@
     <color name="colorAccent">#03DAC5</color>
     <color name="themeColor">#E34730</color>
     <color name="colorBackground">#F2F7FA</color>
-    <color name="bgGrey">#f3f8f9</color>
     <color name="black">#000000</color>
-    <color name="dark">#444444</color>
-    <color name="grey">#565656</color>
-    <color name="greyTxt">#8e8e8e</color>
-    <color name="lightGrey">#FAFAFA</color>
-    <color name="whiteTransparent">#D7000000</color>
-    <color name="orange">#e84727</color>
-    <color name="lightOrange">#fbdad3</color>
-    <color name="white">#ffffff</color>
 </resources>
