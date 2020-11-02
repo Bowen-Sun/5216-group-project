@@ -15,10 +15,8 @@ import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.TextView;
 
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -79,16 +77,11 @@ public class MainActivity extends Activity {
         ValueEventListener noteListener = new ValueEventListener(){
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                Log.d("post1", "Here!!!");
                 orderedItems.clear();
                 // Get Post object and use the values to update the UI
                 for (DataSnapshot noteSnapshot: dataSnapshot.getChildren()) {
                     Note note = noteSnapshot.getValue(Note.class);
-                    Log.d("post", "notes: "+ orderedItems);
                     orderedItems.add(0,note);
-                    Log.d("post", "notes: "+ orderedItems);
-                    Log.d("post", "note: "+ note);
-                    Log.d("post", "noteTitle: "+ note.getTitle());
                 }
                 itemsAdapter = new NotesAdapter(this, R.layout.notes_layout, orderedItems);
                 listView.setAdapter(itemsAdapter);
@@ -104,7 +97,6 @@ public class MainActivity extends Activity {
         Query allQuery = database.child("notes").orderByChild("data");
         allQuery.addValueEventListener(noteListener);
 
-//        downloadPhoto();
         setupListViewListener();
         setupSearchListener();
 
@@ -136,11 +128,6 @@ public class MainActivity extends Activity {
                     String title = data.getExtras().getString("title");
                     String note = data.getExtras().getString("note");
                     Long createTime = new Date().getTime();
-                    Log.d("User", "uid:" + uid);
-                    Log.d("User", "title:" + title);
-                    Log.d("User", "note:" + note);
-                    Log.d("User", "time:" + createTime);
-                    Log.d("User", "time:" + stampToDate(createTime));
                     Note Note = new Note(title, note, createTime, uid,createTime+" : "+uid);
                     database.child("notes").child(createTime+" : "+uid).setValue(Note);
                 }
@@ -188,7 +175,6 @@ public class MainActivity extends Activity {
                     ValueEventListener noteListener = new ValueEventListener(){
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
-                            Log.d("post1", "Here!!!");
                             // Get Post object and use the values to update the UI
                             for (DataSnapshot noteSnapshot: dataSnapshot.getChildren()) {
                                 Note note = noteSnapshot.getValue(Note.class);
@@ -225,7 +211,6 @@ public class MainActivity extends Activity {
                 ValueEventListener noteListener = new ValueEventListener(){
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        Log.d("post1", "Here!!!");
                         // Get Post object and use the values to update the UI
                         for (DataSnapshot noteSnapshot: dataSnapshot.getChildren()) {
                             Note note = noteSnapshot.getValue(Note.class);
@@ -248,32 +233,6 @@ public class MainActivity extends Activity {
             }
         });
     }
-
-    private void downloadPhoto(){
-        final ArrayList<StorageReference> userImages = new ArrayList();
-        Log.d("File1111", " this: "+this.getExternalFilesDir(null));
-        final String typestr = "/userImages/";
-        StorageReference userImageRef = storageRef.child("users");
-        userImageRef.listAll().addOnSuccessListener(new OnSuccessListener<ListResult>() {
-
-            @Override
-            public void onSuccess(ListResult listResult) {
-                for (StorageReference item : listResult.getItems()) {
-                    userImages.add(item);
-                    Log.d("Files", " success get references");
-                }
-            }
-        })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        String errorMessage = e.getMessage();
-                        Log.w("files", errorMessage);
-                        // Uh-oh, an error occurred!
-                    }
-                });
-    }
-
 
     public static String stampToDate(long time) {
         String res;

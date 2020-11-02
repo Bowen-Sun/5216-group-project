@@ -1,6 +1,5 @@
 package comp5216.sydney.edu.au.myapplication.adapter;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +13,6 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import comp5216.sydney.edu.au.myapplication.R;
-import comp5216.sydney.edu.au.myapplication.notes.Note;
 import comp5216.sydney.edu.au.myapplication.notes.Reply;
 
 public class ReplyAdapter extends BaseAdapter {
@@ -44,7 +42,6 @@ public class ReplyAdapter extends BaseAdapter {
     public View getView(int position, View view, ViewGroup parent) {
         // Get the data item for this position
         Reply item = getItem(position);
-        Log.d("reply4", "adapter: "+item);
         // Check if an existing view is being reused, otherwise inflate the view
         if (view == null) {
             view = LayoutInflater.from(parent.getContext()).inflate(R.layout.reply_layout, parent, false);

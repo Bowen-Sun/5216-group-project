@@ -22,12 +22,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
-import java.io.Serializable;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-import comp5216.sydney.edu.au.myapplication.adapter.NotesAdapter;
 import comp5216.sydney.edu.au.myapplication.adapter.ReplyAdapter;
 import comp5216.sydney.edu.au.myapplication.notes.Note;
 import comp5216.sydney.edu.au.myapplication.notes.Reply;
@@ -63,7 +60,7 @@ public class ReplyNoteActivity extends Activity {
         ValueEventListener noteListener = new ValueEventListener(){
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                Log.d("reply1", "Here!!!");
+                orderedItems.clear();
                 // Get Post object and use the values to update the UI
                 for (DataSnapshot noteSnapshot: dataSnapshot.getChildren()) {
                     Reply reply = noteSnapshot.getValue(Reply.class);
@@ -71,7 +68,6 @@ public class ReplyNoteActivity extends Activity {
                 }
                 itemsAdapter = new ReplyAdapter(this, R.layout.reply_layout, orderedItems);
                 listView.setAdapter(itemsAdapter);
-                Log.d("reply2", "Here!!!");
             }
 
             @Override
@@ -81,9 +77,8 @@ public class ReplyNoteActivity extends Activity {
                 // ...
             }
         };
-        Log.d("reply", "name:"+note.getName());
         Query allQuery = database.child("replys").orderByChild("ownerName").equalTo(note.getName());
-        allQuery.addListenerForSingleValueEvent(noteListener);
+        allQuery.addValueEventListener(noteListener);
         Title.setText(note.getTitle());
         Note.setText(note.getContent());
     }
@@ -113,7 +108,6 @@ public class ReplyNoteActivity extends Activity {
         Long createTime = new Date().getTime();
         editNote = (EditText)findViewById(R.id.editReply);
         reply = new Reply(createTime+" : "+mAuth.getUid(),editNote.getText().toString(),createTime,note.getName(),mAuth.getUid());
-        Log.d("reply3", " reply: "+reply);
         orderedItems.add(0,reply);
         itemsAdapter.notifyDataSetChanged();
     }

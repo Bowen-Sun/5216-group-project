@@ -43,7 +43,6 @@ public class ShowNotesAndRepliesActivity extends AppCompatActivity {
     int EditReply = 4;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Log.d("show", "Here1");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_notes);
         Notes = findViewById(R.id.ShowNotes);
@@ -53,7 +52,6 @@ public class ShowNotesAndRepliesActivity extends AppCompatActivity {
         ownNotes = new ArrayList<Note>();
         ownReplys = new ArrayList<Reply>();
         database = FirebaseDatabase.getInstance().getReference();
-        Log.d("show", "User"+mAuth.getUid());
         ValueEventListener noteListener = new ValueEventListener(){
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -73,7 +71,6 @@ public class ShowNotesAndRepliesActivity extends AppCompatActivity {
                 // ...
             }
         };
-        Log.d("show", "Here3");
         if(mAuth.getUid().equals("8IbdHSrb9DTLjsTeGq6Eg4Cr0xv1")){
             Query allQuery = database.child("notes").orderByChild("data");
             allQuery.addListenerForSingleValueEvent(noteListener);
@@ -88,10 +85,8 @@ public class ShowNotesAndRepliesActivity extends AppCompatActivity {
         ValueEventListener replyListener = new ValueEventListener(){
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                Log.d("show", "Here6");
                 // Get Post object and use the values to update the UI
                 for (DataSnapshot noteSnapshot: dataSnapshot.getChildren()) {
-                    Log.d("show", "Here4");
                     Reply reply = noteSnapshot.getValue(Reply.class);
                     ownReplys.add(0,reply);
                 }
@@ -139,7 +134,6 @@ public class ShowNotesAndRepliesActivity extends AppCompatActivity {
             public boolean onItemLongClick(AdapterView<?> parent, View view, final int
                     position, long rowId)
             {
-                Log.i("MainActivity", "Long Clicked item " + position);
                 // Build a alert dialog
                 AlertDialog.Builder builder = new AlertDialog.Builder(ShowNotesAndRepliesActivity.this);
                 // Set text for the dialog
@@ -183,7 +177,6 @@ public class ShowNotesAndRepliesActivity extends AppCompatActivity {
             public boolean onItemLongClick(AdapterView<?> parent, View view, final int
                     position, long rowId)
             {
-                Log.i("MainActivity", "Long Clicked item " + position);
                 // Build a alert dialog
                 AlertDialog.Builder builder = new AlertDialog.Builder(ShowNotesAndRepliesActivity.this);
                 // Set text for the dialog

@@ -56,7 +56,6 @@ public class UserProfile extends AppCompatActivity {
         storage = FirebaseStorage.getInstance();
         storageRef = storage.getReference();
         mAuth = FirebaseAuth.getInstance().getCurrentUser();
-        Log.d("User","userID: "+mAuth.getUid());
         name = findViewById(R.id.name);
         photo = findViewById(R.id.photo);
 
@@ -65,16 +64,15 @@ public class UserProfile extends AppCompatActivity {
 
         try {
             localFile = File.createTempFile("images", ".jpg");
-            Log.d("User","File: "+localFile);
             photoRef.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                    Log.d("User1111111","success: ");
+                    Log.d("User","success");
                 }
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception exception) {
-                    Log.d("User","fail1: ");
+                    Log.d("User","fail");
                 }
             }).addOnCompleteListener(new OnCompleteListener<FileDownloadTask.TaskSnapshot>() {
                 @Override
@@ -85,7 +83,6 @@ public class UserProfile extends AppCompatActivity {
             });
 
         } catch (IOException e) {
-            Log.d("User","fail2: ");
             e.printStackTrace();
         }
 
