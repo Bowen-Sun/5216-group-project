@@ -19,8 +19,7 @@
             android:layout_height="20dp"
             android:src="@drawable/back"
             android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true"
-            android:onClick="showAnnouncement">
+            android:layout_centerVertical="true">
         </ImageView>
         <TextView
             android:layout_width="wrap_content"

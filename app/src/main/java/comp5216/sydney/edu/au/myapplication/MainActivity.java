@@ -13,6 +13,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SearchView;
+import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -51,7 +52,7 @@ public class MainActivity extends Activity {
     private FirebaseAuth mAuth;
     private DatabaseReference database;
     private StorageReference storageRef;
-    Button showAnnouncement;
+    TextView showAnnouncement;
     FirebaseUser currentUser;
     SearchView searchView;
 
