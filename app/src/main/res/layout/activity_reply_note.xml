@@ -40,7 +40,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:background="@color/white">
+            android:background="@color/white"
+            android:padding="15dp">
             <TextView
                 android:id="@+id/title"
                 android:layout_width="match_parent"
@@ -124,13 +125,39 @@
 
 
 <!--            <Button-->
+<!--                android:id="@+id/btnSave"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="10dp"-->
+<!--                android:text="@string/post"-->
+<!--                android:onClick="Post"-->
+<!--                app:layout_constraintEnd_toStartOf="@+id/btnCancel"-->
+<!--                app:layout_constraintStart_toEndOf="@+id/btnBack"-->
+<!--                app:layout_constraintBottom_toBottomOf="parent"/>-->
+
+<!--            <Button-->
+<!--                android:id="@+id/btnBack"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="10dp"-->
+<!--                android:text="@string/go_back"-->
+<!--                android:onClick="onSubmit"-->
+<!--                app:layout_constraintEnd_toStartOf="@+id/btnSave"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintBottom_toBottomOf="parent"/>-->
+
+
+<!--            <Button-->
 <!--                android:id="@+id/btnCancel"-->
 <!--                android:layout_width="wrap_content"-->
 <!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="10dp"-->
 <!--                android:layout_toEndOf="@+id/btnSave"-->
 <!--                android:text="@string/cancel"-->
 <!--                android:onClick="Cancel"-->
-<!--                android:layout_gravity="center"/>-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintStart_toEndOf="@+id/btnSave"-->
+<!--                app:layout_constraintBottom_toBottomOf="parent"/>-->
         </LinearLayout>
 
     </RelativeLayout>
