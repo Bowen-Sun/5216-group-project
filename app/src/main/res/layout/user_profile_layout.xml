@@ -7,13 +7,31 @@
     tools:context=".UserProfile"
     android:orientation="vertical"
     android:background="@color/colorBackground">
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="30dp"
+        android:layout_height="60dp"
         android:layout_alignParentTop="true"
-        android:background="@color/themeColor">
+        android:background="@color/themeColor"
+        android:orientation="horizontal"
+        android:paddingLeft="15dp">
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/back"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            >
+        </ImageView>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Account"
+            android:textColor="#FFFFFF"
+            android:textSize="20dp"
+            android:layout_centerInParent="true">
+        </TextView>
 
-    </LinearLayout>
+    </RelativeLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_weight="1"
@@ -89,7 +107,7 @@
                     android:layout_marginLeft="15dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Email us: shirleyll0830@gmial.com"
+                    android:text="Email us: shirleyll0830@gmail.com"
                     android:layout_gravity="center_vertical"/>
             </LinearLayout>
             <LinearLayout
@@ -136,4 +154,5 @@
 <!--            app:layout_constraintTop_toBottomOf="@+id/showNotesAndReplies"-->
 <!--            android:onClick="goBack"/>-->
     </LinearLayout>
+
 </LinearLayout>
