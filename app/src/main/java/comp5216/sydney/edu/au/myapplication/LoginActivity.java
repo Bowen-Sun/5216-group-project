@@ -3,6 +3,7 @@ package comp5216.sydney.edu.au.myapplication;
 import android.content.Intent;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -55,19 +56,21 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void loginEvent() {
-
-        mAuth.signInWithEmailAndPassword(id.getText().toString(), password.getText().toString())
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            startActivity(new Intent(LoginActivity.this, MainActivity.class));
-                        } else {
-                            Toast.makeText(LoginActivity.this,"login fail",Toast.LENGTH_SHORT).show();
+        try {
+            mAuth.signInWithEmailAndPassword(id.getText().toString(), password.getText().toString())
+                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
+                                startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                            } else {
+                                Toast.makeText(LoginActivity.this,"login fail",Toast.LENGTH_SHORT).show();
+                            }
                         }
-
-                        // ...
-                    }
-                });
+                    });
+        }
+        catch (Exception e){
+            Log.e("LogError",e.toString());
+        }
     }
 }

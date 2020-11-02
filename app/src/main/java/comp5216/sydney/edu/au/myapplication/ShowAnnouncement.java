@@ -65,7 +65,6 @@ public class ShowAnnouncement extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 orderedAnnouncements.clear();
-                Log.d("post1", "Here!!!");
                 // Get Post object and use the values to update the UI
                 for (DataSnapshot noteSnapshot: dataSnapshot.getChildren()) {
                     Announcement announcement = noteSnapshot.getValue(Announcement.class);
@@ -84,11 +83,8 @@ public class ShowAnnouncement extends AppCompatActivity {
                 // ...
             }
         };
-        Log.d("post", "database: "+ database);
-        Log.d("post", "noteListener: "+ noteListener);
         Query allQuery = database.child("announcements").orderByChild("data");
         allQuery.addValueEventListener(noteListener);
-        Log.d("post", "Here notes: "+ orderedAnnouncements);
         setupListViewListener();
         setupSearchListener();
     }
@@ -231,7 +227,6 @@ public class ShowAnnouncement extends AppCompatActivity {
                 ValueEventListener noteListener = new ValueEventListener(){
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        Log.d("post1", "Here!!!");
                         // Get Post object and use the values to update the UI
                         for (DataSnapshot noteSnapshot: dataSnapshot.getChildren()) {
                             Announcement announcement = noteSnapshot.getValue(Announcement.class);
@@ -253,5 +248,10 @@ public class ShowAnnouncement extends AppCompatActivity {
                 return false;
             }
         });
+    }
+
+    public void goBack(View view){
+        Intent intent = new Intent(ShowAnnouncement.this, MainActivity.class);
+        startActivity(intent);
     }
 }

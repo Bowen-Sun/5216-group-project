@@ -230,4 +230,5 @@ public class ShowNotesAndRepliesActivity extends AppCompatActivity {
         Intent intent=new Intent(ShowNotesAndRepliesActivity.this, UserProfile.class);
         startActivity(intent);
     }
+
 }

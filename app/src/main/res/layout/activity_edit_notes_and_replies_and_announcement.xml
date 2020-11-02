@@ -14,12 +14,6 @@
         android:background="@color/themeColor"
         android:orientation="horizontal"
         android:paddingLeft="15dp">
-        <ImageView
-            android:layout_width="20dp"
-            android:layout_gravity="center_vertical"
-            android:layout_height="20dp"
-            android:src="@drawable/back">
-        </ImageView>
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"

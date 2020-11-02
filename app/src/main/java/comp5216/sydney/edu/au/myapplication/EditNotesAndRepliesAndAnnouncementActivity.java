@@ -33,7 +33,7 @@ public class EditNotesAndRepliesAndAnnouncementActivity extends AppCompatActivit
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edit_notes_and_replies);
+        setContentView(R.layout.activity_edit_notes_and_replies_and_announcement);
         Title = findViewById(R.id.textView1);
         Note = findViewById(R.id.textView2);
         editTitle = findViewById(R.id.editTitle);

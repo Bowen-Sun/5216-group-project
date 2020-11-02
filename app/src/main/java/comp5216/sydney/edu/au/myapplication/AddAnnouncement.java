@@ -34,4 +34,9 @@ public class AddAnnouncement extends AppCompatActivity {
         Intent intent=new Intent(AddAnnouncement.this, ShowAnnouncement.class);
         startActivity(intent);
     }
+
+    public void goBack(View view){
+        Intent intent=new Intent(AddAnnouncement.this, ShowAnnouncement.class);
+        startActivity(intent);
+    }
 }

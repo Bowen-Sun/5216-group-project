@@ -46,7 +46,6 @@ public class RegisterActivity extends Activity {
     private File file;
     MarshmallowPermission marshmallowPermission;
     private static final int MY_PERMISSIONS_REQUEST_OPEN_CAMERA = 101;
-    private static final int MY_PERMISSIONS_REQUEST_READ_PHOTOS = 102;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -175,4 +174,8 @@ public class RegisterActivity extends Activity {
         return fileUri;
     }
 
+    public void logIn(View view){
+        Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+        startActivity(intent);
+    }
 }

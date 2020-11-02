@@ -38,4 +38,9 @@ public class AddNote extends AppCompatActivity {
         // Closes the activity, pass data to parent
         finish();
     }
+
+    public void goBack(View view){
+        Intent intent=new Intent(AddNote.this, MainActivity.class);
+        startActivity(intent);
+    }
 }

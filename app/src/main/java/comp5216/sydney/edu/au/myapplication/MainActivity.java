@@ -10,13 +10,12 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
+
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.TextView;
 
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
+
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -26,10 +25,9 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.ListResult;
 import com.google.firebase.storage.StorageReference;
 
-import java.io.File;
+
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -37,7 +35,6 @@ import java.util.Date;
 
 import comp5216.sydney.edu.au.myapplication.adapter.NotesAdapter;
 import comp5216.sydney.edu.au.myapplication.notes.Note;
-import comp5216.sydney.edu.au.myapplication.notes.Reply;
 
 
 public class MainActivity extends Activity {
@@ -218,13 +215,5 @@ public class MainActivity extends Activity {
                 return false;
             }
         });
-    }
-
-    public static String stampToDate(long time) {
-        String res;
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-        Date date = new Date(time);
-        res = simpleDateFormat.format(date);
-        return res;
     }
 }
