@@ -83,53 +83,22 @@ public class ReplyNoteActivity extends Activity {
         Note.setText(note.getContent());
     }
 
-    public void onSubmit(View v) {
-        if(reply != null) {
-            // Prepare data intent for sending it back
-            Intent data = new Intent();
-            // Pass relevant data back as a result
-            editNote = (EditText)findViewById(R.id.editReply);
-            data.putExtra("name", reply.getName());
-            data.putExtra("reply", reply.getContent());
-            data.putExtra("createTime", reply.getData());
-            data.putExtra("ownerName", reply.getOwnerName());
-            data.putExtra("ownerID", reply.getOwnerID());
-
-            data.putExtra("position", position);
-            // Set result code and bundle data for response
-            setResult(RESULT_OK, data);
-            // Closes the activity, pass data to parent
-            finish();
-        }
-        else Toast.makeText(this, "Please click post first", Toast.LENGTH_SHORT).show();
-    }
-
     public void Post(View v) {
         Long createTime = new Date().getTime();
         editNote = (EditText)findViewById(R.id.editReply);
-        reply = new Reply(createTime+" : "+mAuth.getUid(),editNote.getText().toString(),createTime,note.getName(),mAuth.getUid());
-        orderedItems.add(0,reply);
-        itemsAdapter.notifyDataSetChanged();
+        if (!editNote.getText().toString().equals("")){
+            reply = new Reply(createTime+" : "+mAuth.getUid(),editNote.getText().toString(),createTime,note.getName(),mAuth.getUid());
+            orderedItems.add(0,reply);
+            itemsAdapter.notifyDataSetChanged();
+            database.child("replys").child(reply.getName()).setValue(reply);
+        }
+
     }
 
 
     // When user give up edit make a dialog
     public void Cancel(View v) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(ReplyNoteActivity.this);
-        builder.setTitle(R.string.do_not_save_title);
-        builder.setMessage(R.string.do_not_save_message);
-        builder.setPositiveButton(R.string.do_not_save, new
-                DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        // User cancel the editing and go back to main activity
-                        finish();
-                    }});
-        builder.setNegativeButton(R.string.save, new
-                DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        // User cancelled the dialog
-                        // Nothing happens
-                    }});
-        builder.create().show();
+        Intent intent = new Intent(ReplyNoteActivity.this, MainActivity.class);
+        startActivity(intent);
     }
 }

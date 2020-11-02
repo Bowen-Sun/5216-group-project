@@ -13,11 +13,13 @@
         android:orientation="horizontal"
         android:paddingLeft="15dp">
         <ImageView
+            android:id="@+id/replyGoBack"
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:src="@drawable/back"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
+            android:onClick="Cancel"
             >
         </ImageView>
         <TextView
