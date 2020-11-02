@@ -42,7 +42,6 @@ import comp5216.sydney.edu.au.myapplication.notes.Reply;
 
 public class MainActivity extends Activity {
     int POST_NOTE = 1;
-    int Reply_NOTE = 2;
     ListView listView;
     ArrayList<Note> orderedItems;
     // Custom Adapter
@@ -133,19 +132,6 @@ public class MainActivity extends Activity {
                 }
             }
         }
-
-        else if(requestCode == Reply_NOTE){
-            if (resultCode == RESULT_OK) {
-                String name = data.getExtras().getString("name");
-                String content = data.getExtras().getString("reply");
-                String ownerName = data.getExtras().getString("ownerName");
-                String ownerID = data.getExtras().getString("ownerID");
-                Long createTime = data.getExtras().getLong("createTime");
-                Reply reply = new Reply(name,content,createTime,ownerName,ownerID);
-                itemsAdapter.notifyDataSetChanged();
-                database.child("replys").child(name).setValue(reply);
-            }
-        }
     }
 
     private void setupListViewListener() {
@@ -160,7 +146,7 @@ public class MainActivity extends Activity {
                 intent.putExtra("note", (Serializable) updateNote);
                 intent.putExtra("position", i);
                 // brings up the second activity
-                startActivityForResult(intent, Reply_NOTE);
+                startActivity(intent);
                 // Notify listView adapter to update the list
                 itemsAdapter.notifyDataSetChanged();
             }});
