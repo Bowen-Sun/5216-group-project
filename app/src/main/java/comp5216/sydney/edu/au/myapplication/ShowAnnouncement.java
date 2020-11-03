@@ -194,7 +194,8 @@ public class ShowAnnouncement extends AppCompatActivity {
                             // Get Post object and use the values to update the UI
                             for (DataSnapshot noteSnapshot: dataSnapshot.getChildren()) {
                                 Announcement announcement = noteSnapshot.getValue(Announcement.class);
-                                if(announcement.getTitle().toLowerCase().contains(query.toLowerCase())) orderedAnnouncements.add(0,announcement);
+                                if(announcement.getTitle().toLowerCase().contains(query.toLowerCase()) ||
+                                announcement.getContent().toLowerCase().contains(query.toLowerCase())) orderedAnnouncements.add(0,announcement);
                             }
                             announcementAdapter = new AnnouncementAdapter(this, R.layout.notes_layout, orderedAnnouncements);
                             announcementListView.setAdapter(announcementAdapter);

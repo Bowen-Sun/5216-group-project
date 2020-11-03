@@ -161,7 +161,8 @@ public class MainActivity extends Activity {
                             // Get Post object and use the values to update the UI
                             for (DataSnapshot noteSnapshot: dataSnapshot.getChildren()) {
                                 Note note = noteSnapshot.getValue(Note.class);
-                                if(note.getTitle().toLowerCase().contains(query.toLowerCase())) orderedItems.add(0,note);
+                                if(note.getTitle().toLowerCase().contains(query.toLowerCase()) ||
+                                note.getContent().toLowerCase().contains(query.toLowerCase())) orderedItems.add(0,note);
                             }
                             itemsAdapter = new NotesAdapter(this, R.layout.notes_layout, orderedItems);
                             listView.setAdapter(itemsAdapter);
