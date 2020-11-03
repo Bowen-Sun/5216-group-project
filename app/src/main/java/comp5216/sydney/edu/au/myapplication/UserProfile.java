@@ -79,8 +79,6 @@ public class UserProfile extends AppCompatActivity {
                 public void onComplete(@NonNull Task<FileDownloadTask.TaskSnapshot> task) {
                     Bitmap takenImage = BitmapFactory.decodeFile(localFile.getAbsolutePath());
                     photo.setImageBitmap(takenImage);
-                    takenImage.recycle();
-                    takenImage = null;
                 }
             });
 

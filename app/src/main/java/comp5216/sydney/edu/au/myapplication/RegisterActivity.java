@@ -73,7 +73,6 @@ public class RegisterActivity extends Activity {
     }
 
     private void upload() {
-        Toast.makeText(RegisterActivity.this,"photo error",Toast.LENGTH_SHORT).show();
         if (!marshmallowPermission.checkPermissionForCamera()
                 || !marshmallowPermission.checkPermissionForExternalStorage()) {
             marshmallowPermission.requestPermissionForCamera();
@@ -142,7 +141,7 @@ public class RegisterActivity extends Activity {
                 // Load the taken image into a preview
                 profile.setImageBitmap(takenImage);
             } else { // Result was a failure
-                Toast.makeText(this, "Picture wasn't taken AAA!",
+                Toast.makeText(this, "Picture wasn't taken!",
                         Toast.LENGTH_SHORT).show();
             }
         }
