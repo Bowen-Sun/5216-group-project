@@ -91,6 +91,7 @@ public class ReplyNoteActivity extends Activity {
             orderedItems.add(0,reply);
             itemsAdapter.notifyDataSetChanged();
             database.child("replys").child(reply.getName()).setValue(reply);
+            editNote.setText("");
         }
 
     }
