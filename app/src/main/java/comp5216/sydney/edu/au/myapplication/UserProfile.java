@@ -59,9 +59,7 @@ public class UserProfile extends AppCompatActivity {
         name = findViewById(R.id.name);
         photo = findViewById(R.id.photo);
 
-
         StorageReference photoRef = storageRef.child("users/"+mAuth.getUid());
-
         try {
             localFile = File.createTempFile("images", ".jpg");
             photoRef.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {

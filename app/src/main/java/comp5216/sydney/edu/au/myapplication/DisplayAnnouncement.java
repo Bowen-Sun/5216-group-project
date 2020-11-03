@@ -4,8 +4,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.text.method.ScrollingMovementMethod;
 import android.os.Bundle;
 import android.widget.TextView;
-
 import comp5216.sydney.edu.au.myapplication.notes.Announcement;
+
+/**
+ * Display Announcement details
+ *
+ * @author Bowen Sun
+ */
 
 public class DisplayAnnouncement extends AppCompatActivity {
 

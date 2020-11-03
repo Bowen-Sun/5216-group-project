@@ -96,37 +96,42 @@ public class RegisterActivity extends Activity {
     }
 
     private void signup() {
-            FirebaseAuth.getInstance().createUserWithEmailAndPassword(id.getText().toString(),password.getText().toString()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+        if(imageUri == null){
+            Toast.makeText(RegisterActivity.this,"Please take photo first",Toast.LENGTH_SHORT).show();
+        }
+        else {
+            FirebaseAuth.getInstance().createUserWithEmailAndPassword(id.getText().toString(), password.getText().toString()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
-                    if (task.isSuccessful()){
-                        final String uid=FirebaseAuth.getInstance().getCurrentUser().getUid();
-                        final StorageReference storageReference= FirebaseStorage.getInstance().getReference().child("users").child(uid);
+                    if (task.isSuccessful()) {
+                        final String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                        final StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("users").child(uid);
                         storageReference.putFile(imageUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
                             @Override
                             public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
-                                if (task.isSuccessful()){
-                                     storageReference.getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
-                                         @Override
-                                         public void onComplete(@NonNull Task<Uri> task) {
-                                             String imageurl=task.toString();
-                                             UserModel userModel=new UserModel(uid,imageurl,name.getText().toString());
-                                             FirebaseDatabase.getInstance().getReference().child("users").child(uid).setValue(userModel);
-                                             Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
-                                             startActivity(intent);
-                                         }
-                                     });
-                                }else{
-                                    Toast.makeText(RegisterActivity.this,"error2",Toast.LENGTH_SHORT).show();
+                                if (task.isSuccessful()) {
+                                    storageReference.getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Uri> task) {
+                                            String imageurl = task.toString();
+                                            UserModel userModel = new UserModel(uid, imageurl, name.getText().toString());
+                                            FirebaseDatabase.getInstance().getReference().child("users").child(uid).setValue(userModel);
+                                            Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
+                                            startActivity(intent);
+                                        }
+                                    });
+                                } else {
+                                    Toast.makeText(RegisterActivity.this, "error2", Toast.LENGTH_SHORT).show();
                                 }
                             }
                         });
-                    }else{
-                        Toast.makeText(RegisterActivity.this,"error3",Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(RegisterActivity.this, "error3", Toast.LENGTH_SHORT).show();
 
                     }
                 }
             });
+        }
 
 
     }

@@ -3,7 +3,6 @@ package comp5216.sydney.edu.au.myapplication;
 import android.Manifest;
 import android.app.Activity;
 import android.content.pm.PackageManager;
-import android.provider.Settings;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import android.widget.Toast;

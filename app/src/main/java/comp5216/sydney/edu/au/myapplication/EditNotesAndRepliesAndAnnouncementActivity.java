@@ -1,7 +1,6 @@
 package comp5216.sydney.edu.au.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,20 +8,20 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
-
 import androidx.appcompat.app.AlertDialog;
-
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
-
 import comp5216.sydney.edu.au.myapplication.notes.Announcement;
 import comp5216.sydney.edu.au.myapplication.notes.Note;
 import comp5216.sydney.edu.au.myapplication.notes.Reply;
 
+/**
+ * Display Announcement details
+ *
+ * @author Bowen Sun
+ */
+
 public class EditNotesAndRepliesAndAnnouncementActivity extends AppCompatActivity {
-    private DatabaseReference database;
-    private FirebaseUser mAuth;
-    ListView listView;
     public int position;
     TextView Title,Note;
     EditText editTitle,editNote;

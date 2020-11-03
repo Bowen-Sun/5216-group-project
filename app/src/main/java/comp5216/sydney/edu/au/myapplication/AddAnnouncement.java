@@ -1,11 +1,16 @@
 package comp5216.sydney.edu.au.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+
+/**
+ * Stuff to add announcement
+ *
+ * @author Bowen Sun
+ */
 
 public class AddAnnouncement extends AppCompatActivity {
     EditText Title,Note;

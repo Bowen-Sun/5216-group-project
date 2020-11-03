@@ -1,21 +1,14 @@
 package comp5216.sydney.edu.au.myapplication;
 
-import androidx.annotation.NonNull;
-
-
 import android.app.Activity;
 import android.content.Intent;
-
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.TextView;
-
-
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -26,16 +19,17 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-
-
 import java.io.Serializable;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-
 import comp5216.sydney.edu.au.myapplication.adapter.NotesAdapter;
 import comp5216.sydney.edu.au.myapplication.notes.Note;
 
+/**
+ * MainActivity to show all notes
+ *
+ * @author Bowen Sun
+ */
 
 public class MainActivity extends Activity {
     int POST_NOTE = 1;
