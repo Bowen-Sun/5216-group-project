@@ -20,7 +20,7 @@
             android:src="@drawable/back"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
-            android:onClick=""
+            android:onClick="goBack"
             >
         </ImageView>
         <TextView
