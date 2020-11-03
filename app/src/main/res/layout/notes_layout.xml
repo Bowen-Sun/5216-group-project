@@ -35,13 +35,11 @@
                     android:textStyle="bold"
                     android:textColor="#6C6D6E"
                     android:textSize="15sp"
-                    android:text="Harry"
                     android:layout_marginRight="15dp"/>
                 <TextView
                     android:id="@+id/stuffOrStudent"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Student"
                     android:textSize="12sp"
                     />
                 <TextView

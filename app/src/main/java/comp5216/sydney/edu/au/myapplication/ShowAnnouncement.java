@@ -56,7 +56,6 @@ public class ShowAnnouncement extends AppCompatActivity {
         currentUser = mAuth.getCurrentUser();
         addAnnouncement = findViewById(R.id.add_announcement);
         addAnnouncement.setVisibility(View.GONE);
-        currentUser = mAuth.getCurrentUser();
         if(currentUser.getUid().equals("8IbdHSrb9DTLjsTeGq6Eg4Cr0xv1")){
             addAnnouncement.setVisibility(View.VISIBLE);
         }
