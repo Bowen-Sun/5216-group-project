@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -56,7 +57,8 @@ public class ReplyNoteActivity extends Activity {
         Note = (TextView)findViewById(R.id.note);
         position = getIntent().getIntExtra("position",-1);
         listView = findViewById(R.id.replys);
-        // show original content or hint in the text field
+        Title.setMovementMethod(ScrollingMovementMethod.getInstance());
+        Note.setMovementMethod(ScrollingMovementMethod.getInstance());
         ValueEventListener noteListener = new ValueEventListener(){
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
