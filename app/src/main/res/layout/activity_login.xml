@@ -39,7 +39,7 @@
             android:layout_height="50dp"
             android:layout_marginTop="30dp"
             android:background="@drawable/shape_input"
-            android:hint="username"
+            android:hint="email"
             android:textColor="@color/black"
             android:textColorHint="@color/greyTxt" />
 
